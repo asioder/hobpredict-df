@@ -8,4 +8,5 @@
 - matplotlib==3.3.4
 
 ## Usage
-``` python HOB_predict.py smiles.txt featurized_method cutoff
+```
+python HOB_predict.py smiles.txt featurized_method cutoff
