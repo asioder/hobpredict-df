@@ -1,0 +1,4 @@
+NC(CCC(=O)O)c1ccc(Cl)cc1
+CC(N)Cc1cccc(C(F)(F)F)c1
+Cc1cn(C2C=CC(CO)O2)c(=O)nc1O
+N=c1nc(O)c2ccn(COC(CO)CO)c2[nH]1
