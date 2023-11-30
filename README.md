@@ -16,16 +16,16 @@ python == 3.7
 ## usage
 
 ```
-   $ conda activate hob
-   $ python predict.py your_smiles.txt cutoff
-   $ python predict.py your_smiles.txt method_name cutoff
+$ conda activate hob
+$ python predict.py your_smiles.txt cutoff
+$ python predict.py your_smiles.txt method_name cutoff
 ```
 ## example
    With 50 as the cutoff, the default Mordred method predicts human oral bioavailability
 ```
-   $ python predict.py smiles.txt 50
+$ python predict.py smiles.txt 50
 ```
    With 20 as the cutoff, other method predicts human oral bioavailability，Take the circular method as an example
 ```
-   $ python predict.py smiles.txt circular 20
+$ python predict.py smiles.txt circular 20
 ```
