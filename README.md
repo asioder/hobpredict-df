@@ -1,6 +1,6 @@
 # environment
 ```
-   conda hob create -f environment.yml
+   conda env create -f environment.yml
 ```
 python == 3.7
 <br />deep-forest == 0.1.7
