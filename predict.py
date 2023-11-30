@@ -69,7 +69,6 @@ rdkit_columns_to_delete = [2,4,9,10,11,12,13,14,15,16,18,19,20,21,22,24,25,41
 ,203,204,205,206,208]
 
 def featurize(smile_path, feature_name=''):
-    # 定义一个字典，将 feature_name 映射到相应的 DeepChem 特征类
     feature_classes = {
         'maccskeys': deepchem.feat.MACCSKeysFingerprint,
         'circular': deepchem.feat.CircularFingerprint,
@@ -79,10 +78,10 @@ def featurize(smile_path, feature_name=''):
         'pubchem': deepchem.feat.PubChemFingerprint
     }
 
-    # 选择适当的特征类，如果 feature_name 未指定或不在字典中，则使用默认值
+    # Select the appropriate feature class, and use the default value if feature_name is not specified or in the dictionary
     feature_class = feature_classes.get(feature_name, lambda: deepchem.feat.MordredDescriptors(ignore_3D=True))
 
-    # 创建特征实例
+    # Create an instance of the feature
     feature = feature_class()
     with open(smile_path,'r') as smiles_data:
         smile_feature = feature.featurize(smiles_data)
@@ -98,31 +97,31 @@ def load_dfmodel(cutoff):
         df_model = pickle.load(open(file_path, 'rb'))
     return df_model
 
-# 检查输入的参数数量（不包括脚本名称）
+# Check the number of parameters entered
 num_args = len(sys.argv) - 1
-# 当有两个参数时
+# When there are two parameters
 if num_args == 2:
     smile_path = sys.argv[1]
     cutoff = sys.argv[2]
     feature_name = 'mordred'  # feature_name 没有提供
-# 当有三个参数时
+# When there are three parameters
 elif num_args == 3:
     smile_path = sys.argv[1]
     feature_name = sys.argv[2]
     cutoff = sys.argv[3]
 else:
-    # 如果参数数量不正确，打印错误信息
+    # If the number of parameters is incorrect, an error message is printed
     print("Usage: script_name smile_path [feature_name] cutoff")
     sys.exit(1)
 
-# 打开原始文件
+# Open the original file
 with open(smile_path, 'r') as file:
     lines = file.readlines()
 
-# 移除空行
+# Remove blank lines
 non_empty_lines = [line for line in lines if line.strip()]
 
-# 将处理后的内容写回文件
+# Write the processed content back to the file
 with open(smile_path, 'w') as file:
     file.writelines(non_empty_lines)
 
@@ -131,18 +130,18 @@ print(smile_feature.shape)
 print(feature_name)
 
 if feature_name == 'maccskeys' or feature_name =='circular' or feature_name =='mol2vec' or feature_name =='pubchem':
-    # 特征数据预处理
+    # Feature data preprocessing
     smile_feature[np.isnan(smile_feature)] = 0
 
 elif feature_name == '' or feature_name =='mordred':
-    # 特征数据预处理
+    # Feature data preprocessing
     smile_feature[np.isnan(smile_feature)] = 0
-    # 删除这些列
+    # Delete these columns
     smile_feature = np.delete(smile_feature, mordred_columns_to_delete, axis=1)
 elif feature_name =='rdkit':
-    # 特征数据预处理
+    # Feature data preprocessing
     smile_feature[np.isnan(smile_feature)] = 0
-    # 删除这些列
+    # Delete these columns
     smile_feature = np.delete(smile_feature, rdkit_columns_to_delete, axis=1)
 
 
