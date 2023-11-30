@@ -20,7 +20,7 @@ python == 3.7
    $ python predict.py your_smiles.txt cutoff
    $ python predict.py your_smiles.txt method_name cutoff
 ```
-# example
+## example
    With 50 as the cutoff, the default Mordred method predicts human oral bioavailability
 ```
    $ python predict.py smiles.txt 50
